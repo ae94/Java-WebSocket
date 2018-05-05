@@ -150,7 +150,11 @@ public abstract class AbstractWebSocket extends WebSocketAdapter {
 							webSocketImpl.closeConnection( CloseFrame.ABNORMAL_CLOSE , "The connection was closed because the other endpoint did not respond with a pong in time. For more information check: https://github.com/TooTallNate/Java-WebSocket/wiki/Lost-connection-detection");
 						} else {
 							if (webSocketImpl.isOpen()) {
-								webSocketImpl.sendPing();
+								try {
+									webSocketImpl.sendPing();
+								} catch (WebsocketNotConnectedException ex) {
+									// Ignore, as the next run wont return true on webSocketImpl.isOpen()
+          							}
 							} else {
 								if (WebSocketImpl.DEBUG)
 									System.out.println("Trying to ping a non open connection: " + conn.toString());
