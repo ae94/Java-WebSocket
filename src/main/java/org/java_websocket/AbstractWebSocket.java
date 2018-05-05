@@ -26,6 +26,7 @@
 package org.java_websocket;
 
 import org.java_websocket.framing.CloseFrame;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 
 import java.util.ArrayList;
 import java.util.Collection;
